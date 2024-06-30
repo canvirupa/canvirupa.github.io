@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovative Projects 2024</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap');
+
+        :root {
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --accent-color: #00ffff;
+            --secondary-color: #ff00ff;
+            --tertiary-color: #ffff00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-color);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 6rem 0 4rem;
+            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color), var(--tertiary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientFlow 10s ease infinite;
+            background-size: 300% 300%;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            perspective: 1000px;
+        }
+
+        .project {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .project::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--accent-color), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .project:hover::before {
+            opacity: 0.1;
+        }
+
+        .project:hover {
+            transform: scale(1.05) rotateY(10deg);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+
+        .project h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .project p {
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .project ul {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .project li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .project li::before {
+            content: '▹';
+            color: var(--secondary-color);
+            margin-right: 0.5rem;
+            font-size: 1.2em;
+        }
+
+        .project-button {
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            border-radius: 30px;
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--accent-color);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+            z-index: -1;
+        }
+
+        .project-button:hover {
+            color: var(--bg-color);
+        }
+
+        .project-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-follower {
+            width: 8px;
+            height: 8px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.2s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        @media (max-width: 1024px) {
+            .projects {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .parallax-star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-element {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            animation: float 4s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .floating-element:hover {
+            transform: scale(1.1);
+        }
+
+        .floating-element::before {
+            content: '↑';
+            color: var(--bg-color);
+            font-size: 1.5rem;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .project-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--accent-color);
+        }
+
+        .project-stat {
+            display: flex;
+            align-items: center;
+        }
+
+        .project-stat i {
+            margin-right: 0.5rem;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 4rem 0;
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border-radius: 20px;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--secondary-color);
+            transform: scale(1.05);
+        }
+        .project, .cta-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(0);
+    animation: ripple 1s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    <div class="parallax-bg"></div>
+    <header>
+        <nav>
+            <div class="logo">Innovations 2024</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">About Us</a>
+                <a href="#">Projects</a>
+                <a href="#">Contact</a>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Breakthrough Projects of the Future</h1>
+        <div class="projects">
+            <div class="project">
+                <div class="project-image" style="background-image: url('/api/placeholder/400/200');"></div>
+                <h2>Eco-City of the Future</h2>
+                <p>A revolutionary approach to urbanization with a focus on sustainability and eco-friendliness.</p>
+                <ul>
+                    <li>Green Infrastructure</li>
+                    <li>Renewable Energy</li>
+                    <li>Smart Resource Management</li>
+                </ul>
+                <button class="project-button">Explore Project</button>
+                <div class="project-stats">
+                    <div class="project-stat"><i>👥</i> 1.2M+</div>
+                    <div class="project-stat"><i>💚</i> 98%</div>
+                </div>
+            </div>
+            <div class="project">
+                <div class="project-image" style="background-image: url('/api/placeholder/400/200');"></div>
+                <h2>AI Assistant for Business</h2>
+                <p>An intelligent platform for optimizing business processes and decision-making.</p>
+                <ul>
+                    <li>Predictive Analytics</li>
+                    <li>Automation of Routine Tasks</li>
+                    <li>Personalized Insights</li>
+                </ul>
+                <button class="project-button">Learn More</button>
+                <div class="project-stats">
+                    <div class="project-stat"><i>🏢</i> 5000+</div>
+                    <div class="project-stat"><i>📈</i> 35%</div>
+                </div>
+            </div>
+            <div class="project">
+                <div class="project-image" style="background-image: url('/api/placeholder/400/200');"></div>
+                <h2>Immersive Learning</h2>
+                <p>A next-generation educational ecosystem with immersion into virtual worlds of knowledge.</p>
+                <ul>
+                    <li>Adaptive VR/AR Courses</li>
+                    <li>Gamification of Learning</li>
+                    <li>AI Tutors</li>
+                </ul>
+                <button class="project-button">Immerse</button>
+                <div class="project-stats">
+                    <div class="project-stat"><i>🎓</i> 2M+</div>
+                    <div class="project-stat"><i>🚀</i> 45%</div>
+                </div>
+            </div>
+        </div>
+        <div class="cta-section">
+            <h2>Ready to Shape the Future?</h2>
+            <p>Join us in creating tomorrow's innovations today!</p>
+            <button class="cta-button">Get Involved</button>
+        </div>
+    </div>
+    <div class="floating-element"></div>
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
+    
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                follower.style.left = e.clientX + 'px';
+                follower.style.top = e.clientY + 'px';
+            }, 50);
+        });
+    
+        // Parallax background
+        const parallaxBg = document.querySelector('.parallax-bg');
+        
+        function createStar() {
+            const star = document.createElement('div');
+            star.classList.add('parallax-star');
+            star.style.width = Math.random() * 3 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            parallaxBg.appendChild(star);
+        }
+    
+        for (let i = 0; i < 100; i++) {
+            createStar();
+        }
+    
+        document.addEventListener('mousemove', (e) => {
+            const stars = document.querySelectorAll('.parallax-star');
+            stars.forEach(star => {
+                const speed = star.offsetWidth * 0.05;
+                const x = (window.innerWidth - e.pageX * speed) / 100;
+                const y = (window.innerHeight - e.pageY * speed) / 100;
+                star.style.transform = `translateX(${x}px) translateY(${y}px)`;
+            });
+        });
+    
+        // Floating element scroll to top
+        const floatingElement = document.querySelector('.floating-element');
+        floatingElement.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    
+        // Project hover effect
+        const projects = document.querySelectorAll('.project');
+        projects.forEach(project => {
+            project.addEventListener('mousemove', (e) => {
+                const rect = project.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const angleX = (y - centerY) / 20;
+                const angleY = (centerX - x) / 20;
+                
+                project.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale3d(1.05, 1.05, 1.05)`;
+            });
+            
+            project.addEventListener('mouseleave', () => {
+                project.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            });
+        });
+    
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    
+        // Animate elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.project, .cta-section');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                if (rect.top < windowHeight * 0.8) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        };
+    
+        window.addEventListener('scroll', animateOnScroll);
+    
+        // Initialize animation on load
+        window.addEventListener('load', animateOnScroll);
+    
+        // Header shrink on scroll
+        const header = document.querySelector('header');
+        let lastScrollTop = 0;
+    
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                header.style.padding = '0.5rem 2rem';
+            } else {
+                header.style.padding = '1rem 2rem';
+            }
+            lastScrollTop = scrollTop;
+        });
+    
+        // Project button click effect
+        const projectButtons = document.querySelectorAll('.project-button');
+        projectButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                button.appendChild(ripple);
+                const rect = button.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = `${size}px`;
+                ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+                ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+                ripple.classList.add('active');
+                setTimeout(() => {
+                    ripple.remove();
+                }, 1000);
+            });
+        });
+    </script>
+    </body>
+    </html>
