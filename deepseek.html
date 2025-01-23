@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прикладная феноменология: Практика смыслов</title>
+    <style>
+        :root {
+            --bg: #fbfbfb;
+            --text: #2d3436;
+            --accent: #2c3e50;
+            --secondary: #7f8c8d;
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            text-align: center;
+            max-width: 900px;
+            font-weight: 300;
+            position: relative;
+            line-height: 1.3;
+        }
+
+        .decorative-line {
+            width: 150px;
+            height: 2px;
+            background: var(--accent);
+            margin: 3rem auto;
+            opacity: 0.2;
+        }
+
+        .content-section {
+            padding: 6rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+            font-weight: 500;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.7em;
+            width: 25px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        p {
+            margin-bottom: 1.8rem;
+            color: var(--secondary);
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+
+        .interactive-block {
+            margin: 4rem 0;
+            padding: 2.5rem;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.03);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .interactive-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        }
+
+        .method-grid {
+            display: grid;
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .method-card {
+            padding: 2rem;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .method-card:hover {
+            background: rgba(44,62,80,0.03);
+        }
+
+        .quote {
+            position: relative;
+            margin: 4rem 0;
+            padding: 2rem 0;
+            font-size: 1.4rem;
+            text-align: center;
+            color: var(--accent);
+        }
+
+        .quote::before,
+        .quote::after {
+            content: '“';
+            font-size: 4rem;
+            position: absolute;
+            color: rgba(44,62,80,0.1);
+        }
+
+        .quote::before { left: -1rem; top: -1rem; }
+        .quote::after { right: -1rem; bottom: -2rem; }
+
+        .timeline {
+            position: relative;
+            margin: 4rem 0;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 3px;
+            top: 10px;
+            height: calc(100% - 20px);
+            width: 2px;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            background: white;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            .content-section { padding: 4rem 1rem; }
+            .interactive-block { padding: 1.5rem; }
+        }
+
+        .interactive-diagram {
+            width: 100%;
+            height: 400px;
+            margin: 4rem 0;
+            background: 
+                linear-gradient(45deg, 
+                    transparent 49%, 
+                    rgba(44,62,80,0.1) 50%, 
+                    transparent 51%);
+            position: relative;
+            cursor: move;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Феноменология в действии:<br>От теории к практике восприятия</h1>
+    </div>
+
+    <section class="content-section">
+        <div class="decorative-line"></div>
+        
+        <h2>Сущность метода</h2>
+        <p>Феноменология, возникшая как ответ на кризис европейских наук, предлагает принципиально новый способ работы с опытом. В отличие от традиционного научного подхода, феноменологический метод требует:</p>
+        
+        <div class="method-grid">
+            <div class="method-card">
+                <h3>Эпохé</h3>
+                <p>Сознательное воздержание от предварительных суждений и теоретических конструкций</p>
+            </div>
+            <div class="method-card">
+                <h3>Редукция</h3>
+                <p>Возвращение к "самим вещам" через очищение восприятия</p>
+            </div>
+            <div class="method-card">
+                <h3>Интенциональность</h3>
+                <p>Анализ направленности сознания на объекты</p>
+            </div>
+        </div>
+
+        <div class="interactive-block">
+            <h3>Практическое упражнение: Феноменологическое наблюдение</h3>
+            <p>1. Выберите обыденный объект (чашка, дерево, звук)<br>
+            2. Зафиксируйте внимание на его непосредственных качествах<br>
+            3. Отстранитесь от функциональных ассоциаций<br>
+            4. Описывайте опыт без интерпретаций<br>
+            5. Отмечайте изменения в восприятии</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>Исторический контекст</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>1900-1913: Истоки</h3>
+                <p>Работы Гуссерля "Логические исследования" закладывают основы метода</p>
+            </div>
+            <div class="timeline-item">
+                <h3>1927: Поворот к экзистенции</h3>
+                <p>Хайдеггер переосмысляет феноменологию в "Бытии и времени"</p>
+            </div>
+            <div class="timeline-item">
+                <h3>1945: Телесный поворот</h3>
+                <p>Мерло-Понти публикует "Феноменологию восприятия"</p>
+            </div>
+        </div>
+
+        <div class="quote">
+            Философ должен научиться видеть то, что всегда перед глазами
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>Современные применения</h2>
+        <p>В цифровую эпоху феноменология находит новые области применения:</p>
+
+        <div class="interactive-block">
+            <h3>UX-исследования</h3>
+            <p>Анализ непосредственного опыта взаимодействия с интерфейсами помогает создавать интуитивные цифровые продукты</p>
+        </div>
+
+        <div class="interactive-block">
+            <h3>Клиническая психология</h3>
+            <p>Методы феноменологической редукции используются в работе с травматическим опытом</p>
+        </div>
+
+        <div class="interactive-block">
+            <h3>Архитектура</h3>
+            <p>Пространственный анализ восприятия формирует новые подходы в проектировании городской среды</p>
+        </div>
+    </section>
+
+    <script>
+        // Анимация появления
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    if(entry.target.classList.contains('interactive-block')) {
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.content-section, .interactive-block, .method-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Интерактивная диаграмма
+        const diagram = document.createElement('div');
+        diagram.className = 'interactive-diagram';
+        document.querySelector('.content-section').appendChild(diagram);
+
+        // Параллакс-эффект
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            diagram.style.backgroundPosition = `${scrolled * 0.3}px ${scrolled * 0.2}px`;
+        });
+
+        // Динамические тени
+        document.addEventListener('mousemove', (e) => {
+            document.querySelectorAll('.interactive-block').forEach(block => {
+                const rect = block.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                block.style.boxShadow = 
+                    `${-x/40}px ${-y/40}px 30px rgba(0,0,0,0.03)`;
+            });
+        });
+
+        // Интерактивная временная линия
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
