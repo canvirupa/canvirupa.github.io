@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Дзен-фрактал: Дао и Чан</title>
+  <style>
+    /* Основные стили для утончённого минимализма */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Noto Sans', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    /* Полотно занимает весь экран */
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .controls {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 30px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      z-index: 2;
+    }
+    .control {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .control label {
+      margin-bottom: 5px;
+      color: #444;
+    }
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 150px;
+      background: transparent;
+    }
+    input[type="range"]::-webkit-slider-runnable-track {
+      height: 4px;
+      background: #ddd;
+      border-radius: 2px;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      background: #aaa;
+      border-radius: 50%;
+      margin-top: -5px;
+      cursor: pointer;
+    }
+    /* Таймер в правом нижнем углу */
+    #timerBox {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 8px;
+      padding: 10px 15px;
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      z-index: 2;
+    }
+    #timerBox input[type="number"] {
+      width: 50px;
+      padding: 4px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      text-align: center;
+    }
+    #timerBox button {
+      margin-left: 5px;
+      padding: 4px 8px;
+      border: none;
+      border-radius: 4px;
+      background: #a3c2c2;
+      color: #fff;
+      cursor: pointer;
+    }
+    #timerDisplay {
+      margin-top: 8px;
+      font-weight: bold;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <!-- Панель управления -->
+  <div class="controls">
+    <div class="control">
+      <label for="speedSlider">Скорость</label>
+      <input type="range" id="speedSlider" min="0.1" max="5" step="0.1" value="1">
+    </div>
+    <div class="control">
+      <label for="saturationSlider">Насыщенность</label>
+      <input type="range" id="saturationSlider" min="0" max="100" step="1" value="50">
+    </div>
+    <div class="control">
+      <label for="amplitudeSlider">Амплитуда</label>
+      <input type="range" id="amplitudeSlider" min="0.5" max="2" step="0.1" value="1">
+    </div>
+  </div>
+
+  <!-- Canvas для рисования -->
+  <canvas id="fractalCanvas"></canvas>
+
+  <!-- Таймер для медитативной практики -->
+  <div id="timerBox">
+    <div>
+      <label for="timerInput">Таймер (мин):</label>
+      <input type="number" id="timerInput" min="1" max="120" value="10">
+      <button id="startTimer">Старт</button>
+    </div>
+    <div id="timerDisplay">00:00</div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('fractalCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const speedSlider = document.getElementById('speedSlider');
+    const saturationSlider = document.getElementById('saturationSlider');
+    const amplitudeSlider = document.getElementById('amplitudeSlider');
+
+    let angleOffset = 0;
+    let lastTime = 0;
+    let baseHue = 200;
+
+    /**
+     * Функция рисует фрактальную ветвь с массивным стволом.
+     * Добавлена амплитуда для управления величиной колебаний ветвей.
+     * @param {number} x Начальная координата X
+     * @param {number} y Начальная координата Y
+     * @param {number} length Длина ветви
+     * @param {number} angle Угол поворота
+     * @param {number} branchWidth Толщина ветви
+     * @param {number} depth Глубина рекурсии
+     */
+    function drawFractal(x, y, length, angle, branchWidth, depth) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(angle);
+
+      ctx.lineWidth = branchWidth;
+      ctx.lineCap = 'round';
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
+      ctx.shadowBlur = 10;
+
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.quadraticCurveTo(branchWidth, -length / 2, 0, -length);
+      ctx.stroke();
+
+      if (depth <= 0 || length < 10) {
+        ctx.restore();
+        return;
+      }
+
+      const newLength = length * 0.75;
+      const newBranchWidth = branchWidth * 0.7;
+      const amplitude = parseFloat(amplitudeSlider.value);
+      const angleVariance = (0.3 + 0.2 * Math.sin(angleOffset + depth)) * amplitude;
+
+      drawFractal(0, -length, newLength, angleVariance, newBranchWidth, depth - 1);
+      drawFractal(0, -length, newLength, -angleVariance, newBranchWidth, depth - 1);
+
+      ctx.restore();
+    }
+
+    /**
+     * Функция для отрисовки анимированного градиентного фона,
+     * напоминающего лёгкий туман, с более заметными переливами.
+     */
+    function drawFogBackground(time) {
+      // Смещение для анимации
+      const offset = Math.sin(time / 10000) * 50;
+      // Создаем линейный градиент по вертикали с более выраженными переходами
+      const gradient = ctx.createLinearGradient(0, 0 + offset, 0, height + offset);
+      gradient.addColorStop(0, 'hsla(210, 70%, 98%, 1)');    // верх: очень светлый
+      gradient.addColorStop(0.5, 'hsla(210, 70%, 88%, 0.8)');  // середина: чуть более тёмный, заметный переход
+      gradient.addColorStop(1, 'hsla(210, 70%, 98%, 1)');      // низ: снова очень светлый
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
+    }
+
+    /**
+     * Анимационный цикл: отрисовка фона и фрактального дерева.
+     */
+    function animate(timestamp) {
+      if (!lastTime) lastTime = timestamp;
+      const deltaTime = (timestamp - lastTime) / 1000;
+      lastTime = timestamp;
+
+      const speed = parseFloat(speedSlider.value);
+      angleOffset += 0.5 * speed * deltaTime;
+
+      // Рисуем анимированный фон-туман с более заметными переходами
+      drawFogBackground(timestamp);
+
+      const saturation = saturationSlider.value;
+      baseHue = 200 + 20 * Math.sin(angleOffset / 2);
+      ctx.strokeStyle = `hsla(${baseHue}, ${saturation}%, 55%, 0.8)`;
+
+      // Рисуем дерево, начиная с нижней центральной точки экрана
+      ctx.save();
+      ctx.translate(width / 2, height);
+      drawFractal(0, 0, height / 4, 0, 20, 8);
+      ctx.restore();
+
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+
+    // Таймер для медитативной практики
+    const timerInput = document.getElementById('timerInput');
+    const startTimerBtn = document.getElementById('startTimer');
+    const timerDisplay = document.getElementById('timerDisplay');
+    let timerInterval;
+    let remainingSeconds = 0;
+
+    function updateTimerDisplay() {
+      const minutes = Math.floor(remainingSeconds / 60);
+      const seconds = remainingSeconds % 60;
+      timerDisplay.textContent = 
+        String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+    }
+
+    function startTimer() {
+      clearInterval(timerInterval);
+      const minutes = parseInt(timerInput.value);
+      if (isNaN(minutes) || minutes <= 0) return;
+      remainingSeconds = minutes * 60;
+      updateTimerDisplay();
+      
+      timerInterval = setInterval(() => {
+        remainingSeconds--;
+        if (remainingSeconds <= 0) {
+          clearInterval(timerInterval);
+          timerDisplay.textContent = "Время вышло";
+          timerDisplay.style.color = "#a33";
+        } else {
+          updateTimerDisplay();
+        }
+      }, 1000);
+    }
+
+    startTimerBtn.addEventListener('click', startTimer);
+  </script>
+</body>
+</html>
