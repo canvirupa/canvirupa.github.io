@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agora Insights - Your Philosophical Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Global Reset & Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Enables smooth scrolling */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa; /* Light grey background */
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #0A2342; /* Deep Blue */
+        }
+
+        h1 { font-size: 2.8rem; line-height: 1.2; }
+        h2 { font-size: 2.2rem; }
+        h3 { font-size: 1.5rem; }
+
+        p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2CA58D; /* Teal Accent */
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #2CA58D; /* Teal Accent */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #238570; /* Darker Teal */
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: #fff;
+            color: #0A2342;
+            border: 1px solid #0A2342;
+        }
+
+         .btn-secondary:hover {
+            background-color: #f0f0f0;
+            color: #0A2342;
+         }
+
+        /* --- Header --- */
+        .main-header {
+            background-color: #fff;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Merriweather', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0A2342;
+        }
+        .logo a { color: inherit; } /* Make logo link inherit color */
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .main-nav li {
+            margin-left: 25px;
+        }
+
+        .main-nav a {
+            font-weight: 600;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: #2CA58D;
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            background: linear-gradient(rgba(10, 35, 66, 0.8), rgba(10, 35, 66, 0.8)), url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover; /* Placeholder image */
+            color: #fff;
+            text-align: center;
+            padding: 120px 0;
+        }
+
+        #hero h1 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+            color: #eee;
+        }
+
+        #hero .btn {
+            font-size: 1.1rem;
+            padding: 15px 35px;
+        }
+
+        /* --- Features Section --- */
+        #features {
+            background-color: #fff;
+        }
+
+        #features h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .feature-item {
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon { /* Placeholder for icons */
+            font-size: 3rem;
+            color: #2CA58D;
+            margin-bottom: 1rem;
+            /* Replace with actual icons later, e.g., FontAwesome or SVGs */
+            /* Example using text placeholder: */
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .feature-item h3 {
+            margin-bottom: 0.8rem;
+        }
+
+        /* --- Testimonials Section --- */
+        #testimonials {
+             background-color: #e9ecef; /* Slightly darker grey */
+        }
+
+        #testimonials h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: relative;
+            padding-left: 50px; /* Space for quote icon */
+        }
+
+        .testimonial-card::before {
+            content: '“'; /* Opening quote */
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            font-size: 4rem;
+            color: #2CA58D;
+            font-family: 'Merriweather', serif;
+            line-height: 1;
+            opacity: 0.3;
+        }
+
+        .testimonial-card blockquote {
+            margin-bottom: 1rem;
+            font-style: italic;
+            color: #444;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #0A2342;
+            text-align: right;
+        }
+
+        .testimonial-author span {
+            display: block;
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* --- Pricing Section --- */
+        #pricing {
+             background-color: #fff;
+        }
+
+        #pricing h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            align-items: stretch; /* Make cards same height */
+        }
+
+        .pricing-plan {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+         .pricing-plan:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(44, 165, 141, 0.2); /* Teal shadow on hover */
+        }
+
+        .pricing-plan h3 {
+            color: #2CA58D;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0A2342;
+            margin-bottom: 0.5rem;
+        }
+
+        .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #777;
+        }
+
+        .pricing-plan ul {
+            list-style: none;
+            margin: 1.5rem 0;
+            text-align: left;
+            padding-left: 20px;
+            flex-grow: 1; /* Push button to bottom */
+        }
+
+        .pricing-plan li {
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+
+         .pricing-plan li::before {
+            content: '✓'; /* Checkmark */
+            color: #2CA58D;
+            font-weight: bold;
+            position: absolute;
+            left: -20px;
+        }
+
+        .pricing-plan .btn {
+            margin-top: auto; /* Stick to bottom */
+        }
+
+        .plan-popular {
+            border-color: #2CA58D;
+            border-width: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-popular::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: 15px;
+            right: -35px;
+            background-color: #2CA58D;
+            color: white;
+            padding: 5px 30px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transform: rotate(45deg);
+            text-align: center;
+        }
+
+        /* --- Final CTA Section --- */
+        #cta-final {
+            background-color: #0A2342; /* Deep Blue */
+            color: #fff;
+            text-align: center;
+        }
+
+        #cta-final h2 {
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        #cta-final p {
+            color: #eee;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #cta-final .btn {
+            background-color: #fff;
+            color: #0A2342;
+            font-size: 1.1rem;
+            padding: 15px 35px;
+        }
+         #cta-final .btn:hover {
+            background-color: #f0f0f0;
+            color: #0A2342;
+         }
+
+        /* --- Footer --- */
+        .main-footer {
+            background-color: #333;
+            color: #ccc;
+            padding: 40px 0 20px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .footer-links li {
+            margin: 0 15px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons a {
+            color: #ccc;
+            margin: 0 10px;
+            font-size: 1.4rem; /* Placeholder size */
+            transition: color 0.3s ease;
+        }
+
+         .social-icons a:hover {
+            color: #2CA58D;
+         }
+         /* Placeholder for actual social icons */
+         .social-icons span { margin: 0 5px; }
+
+        .copyright {
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+
+        /* --- Responsiveness --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+
+            .main-header .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .logo {
+                margin-bottom: 10px;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                padding: 10px 0; /* Add some space when stacked */
+                 width: 100%;
+                 align-items: center;
+            }
+
+            .main-nav li {
+                margin: 8px 0; /* Adjust spacing for vertical layout */
+                margin-left: 0; /* Reset left margin */
+                width: 100%;
+                text-align: center;
+            }
+
+            .main-nav .btn {
+                 margin-top: 10px;
+            }
+
+            #hero {
+                padding: 80px 0;
+            }
+
+             #hero h1 {
+                font-size: 2.4rem;
+            }
+            #hero p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 40px 0;
+            }
+
+            .features-grid,
+            .testimonials-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr; /* Stack columns */
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+             .footer-links {
+                flex-direction: column;
+                 margin-bottom: 20px;
+            }
+            .footer-links li {
+                 margin: 5px 0;
+            }
+            .social-icons {
+                 margin-top: 10px;
+            }
+
+        }
+
+         @media (max-width: 480px) {
+             .btn {
+                 padding: 10px 20px;
+                 font-size: 0.9rem;
+             }
+             #hero .btn {
+                 padding: 12px 28px;
+             }
+             .price {
+                 font-size: 2rem;
+             }
+             .testimonial-card {
+                 padding: 20px;
+                 padding-left: 20px; /* Adjust padding */
+             }
+             .testimonial-card::before { display: none; } /* Hide quote on small screens if needed */
+         }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo"><a href="#">Agora Insights</a></div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#cta-final" class="btn btn-secondary">Get Started</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="container">
+                <h1>Uncover Deeper Meaning. Together.</h1>
+                <p>Agora Insights is a collaborative space dedicated to rigorous philosophical exploration, critical thinking development, and the pursuit of clarity in a complex world.</p>
+                <a href="#pricing" class="btn">Start Your Journey</a>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features">
+            <div class="container">
+                <h2>Why Agora Insights?</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🗣️</div> <!-- Placeholder icon -->
+                        <h3>Structured Dialogues</h3>
+                        <p>Engage in moderated, in-depth discussions on foundational questions and contemporary dilemmas.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📚</div> <!-- Placeholder icon -->
+                        <h3>Curated Resources</h3>
+                        <p>Access a growing library of key texts, seminal essays, and challenging thought experiments.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">💡</div> <!-- Placeholder icon -->
+                        <h3>Expert Workshops</h3>
+                        <p>Learn practical philosophical tools and methods from experienced facilitators and thinkers.</p>
+                    </div>
+                     <div class="feature-item">
+                        <div class="feature-icon">🧭</div> <!-- Placeholder icon -->
+                        <h3>Personalized Pathways</h3>
+                        <p>Track your intellectual progress and discover curated pathways tailored to your interests.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials">
+            <div class="container">
+                <h2>Wisdom from Our Members</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <blockquote>Agora Insights revitalized my thinking. The structured debates forced me to clarify my own positions and appreciate opposing views more deeply.</blockquote>
+                        <p class="testimonial-author">Dr. Evelyn Reed <span>University Professor</span></p>
+                    </div>
+                    <div class="testimonial-card">
+                        <blockquote>I finally found a community that values thoughtful discourse over quick takes. The resources are excellent, and the workshops are incredibly insightful.</blockquote>
+                        <p class="testimonial-author">Marcus Chen <span>Software Engineer & Lifelong Learner</span></p>
+                    </div>
+                    <div class="testimonial-card">
+                        <blockquote>Applying philosophical frameworks learned here has surprisingly improved my decision-making, both personally and professionally. Highly recommended.</blockquote>
+                        <p class="testimonial-author">Aisha Khan <span>Management Consultant</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing">
+            <div class="container">
+                <h2>Choose Your Path</h2>
+                <div class="pricing-grid">
+                    <div class="pricing-plan">
+                        <h3>Explorer</h3>
+                        <div class="price">Free</div>
+                        <p>Dip your toes into philosophical waters.</p>
+                        <ul>
+                            <li>Access to public forums</li>
+                            <li>Weekly newsletter digest</li>
+                            <li>Limited resource library access</li>
+                            <li>Basic progress tracking</li>
+                        </ul>
+                        <a href="#" class="btn btn-secondary">Sign Up Free</a>
+                    </div>
+                    <div class="pricing-plan plan-popular">
+                        <h3>Synthesizer</h3>
+                        <div class="price">$15<span>/month</span></div>
+                        <p>Engage fully with ideas and community.</p>
+                        <ul>
+                            <li>Full access to forums & dialogues</li>
+                            <li>Complete resource library</li>
+                            <li>Access to standard workshops</li>
+                            <li>Enhanced progress tracking</li>
+                            <li>Priority support</li>
+                        </ul>
+                        <a href="#" class="btn">Choose Synthesizer</a>
+                    </div>
+                    <div class="pricing-plan">
+                        <h3>Philosopher</h3>
+                        <div class="price">$45<span>/month</span></div>
+                        <p>Deepen your practice with exclusive access.</p>
+                        <ul>
+                            <li>All Synthesizer features</li>
+                            <li>Access to advanced & expert workshops</li>
+                            <li>Direct Q&A sessions with facilitators</li>
+                            <li>Personalized learning pathway consultations</li>
+                            <li>Early access to new features</li>
+                        </ul>
+                        <a href="#" class="btn btn-secondary">Become a Philosopher</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Call-to-Action Section -->
+        <section id="cta-final">
+            <div class="container">
+                <h2>Ready to Deepen Your Understanding?</h2>
+                <p>Join Agora Insights today and become part of a vibrant community committed to meaningful inquiry and intellectual growth. Sharpen your mind, challenge your assumptions, and explore the big questions.</p>
+                <a href="#pricing" class="btn">Sign Up Today</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                 <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+                 <div class="social-icons">
+                    <!-- Replace text with actual icons (e.g., Font Awesome) later -->
+                    <a href="#" title="Twitter"><span>TW</span></a>
+                    <a href="#" title="LinkedIn"><span>LI</span></a>
+                    <a href="#" title="Medium"><span>ME</span></a>
+                 </div>
+            </div>
+            <p class="copyright">&copy; <span id="currentYear"></span> Agora Insights. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple script to update the copyright year automatically
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Smooth scrolling for internal links (optional enhancement)
+        // This basic version relies on CSS scroll-behavior: smooth;
+        // For broader browser support or more complex effects, a JS library might be used.
+        // Example of how you *could* add JS smooth scroll if CSS wasn't enough:
+        /*
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Check if it's just a placeholder link or a real section link
+                const href = this.getAttribute('href');
+                if (href.length > 1 && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                } else if (href === '#') {
+                     e.preventDefault(); // Prevent jumping to top for placeholder links
+                }
+            });
+        });
+        */
+
+        // The navigation links in the HTML use direct href="#section-id".
+        // Combined with `html { scroll-behavior: smooth; }` in CSS, this provides
+        // smooth scrolling in modern browsers without extra JavaScript.
+        // The JS above is commented out as CSS handles the primary requirement.
+
+    </script>
+
+</body>
+</html>
