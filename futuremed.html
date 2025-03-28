@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureMed Russia | Next-Gen Healthcare Access</title>
+    <meta name="description" content="Experience futuristic healthcare in Russia. Affordable, high-tech medical treatments with minimal wait times. Explore advanced diagnostics, surgery, dentistry, and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS Reset & Experimental Setup --- */
+        :root {
+            /* Futurist Light Palette */
+            --primary-glow: #00A1FF; /* Bright Cyan/Blue for highlights and glow */
+            --secondary-accent: #9013FE; /* Purple accent */
+            --gradient-start: #4A90E2; /* Soft Blue */
+            --gradient-end: #50E3C2; /* Teal/Mint */
+            --text-color: #222; /* Darker for contrast */
+            --light-text-color: #555;
+            --bg-color: #FFFFFF;
+            --bg-alt-color: #F5F7FA; /* Slightly off-white */
+            --border-color: rgba(0, 161, 255, 0.2); /* Light, glowing border */
+
+            /* Typography */
+            --heading-font: 'Space Grotesk', sans-serif; /* More character */
+            --body-font: 'Inter', sans-serif; /* Clean and readable */
+
+            /* Layout & Spacing */
+            --container-width: 1200px;
+            --spacing-unit: 1rem; /* 16px */
+
+            /* Animation */
+            --transition-fast: 0.2s ease-out;
+            --transition-medium: 0.4s ease-out;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            background-color: var(--bg-color); /* Ensure background is set on html */
+        }
+
+        body {
+            font-family: var(--body-font);
+            color: var(--text-color);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+        }
+
+        /* --- Logo (Easter Egg Target) --- */
+        .logo {
+            font-family: var(--heading-font);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-color);
+            cursor: pointer; /* Indicate interactivity */
+            display: inline-block;
+            padding: calc(var(--spacing-unit) * 0.5) 0;
+            position: relative;
+            z-index: 10; /* Keep logo above potential background elements */
+            transition: transform var(--transition-medium);
+        }
+        .logo span { /* Gradient effect on part of the logo */
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .logo:hover {
+             transform: scale(1.05);
+        }
+        /* Easter egg animation - triggered by JS */
+        .logo.easter-egg-spin {
+            animation: spin 0.5s linear;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg) scale(1.05); }
+            to { transform: rotate(360deg) scale(1.05); }
+        }
+
+
+        /* --- Typography & Headings --- */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--heading-font);
+            font-weight: 700;
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+            line-height: 1.2;
+            letter-spacing: -0.5px; /* Slightly tighter spacing */
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem); /* Responsive font size */
+            font-weight: 900; /* Make H1 really stand out */
+             letter-spacing: -1.5px;
+             margin-bottom: var(--spacing-unit);
+             /* Optional: Gradient text */
+             /* background: linear-gradient(90deg, #333, #555);
+             -webkit-background-clip: text;
+             background-clip: text;
+             color: transparent; */
+        }
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-top: calc(var(--spacing-unit) * 4);
+            position: relative;
+            display: inline-block; /* Allows underline effect */
+            padding-bottom: calc(var(--spacing-unit) * 0.5);
+        }
+        /* Underline effect for H2 */
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px; /* Short underline */
+            height: 4px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 2px;
+        }
+
+        h3 { font-size: 1.5rem; color: var(--primary-glow); margin-top: var(--spacing-unit) * 2; }
+        p { margin-bottom: var(--spacing-unit); color: var(--light-text-color); max-width: 65ch; /* Improve readability */ }
+        a { color: var(--primary-glow); text-decoration: none; font-weight: 600; position: relative; }
+        /* Interactive underline for links */
+         a::after {
+             content: '';
+             position: absolute;
+             width: 100%;
+             height: 2px;
+             bottom: -2px;
+             left: 0;
+             background-color: var(--primary-glow);
+             transform: scaleX(0);
+             transform-origin: bottom right;
+             transition: transform 0.25s ease-out;
+         }
+         a:hover::after {
+             transform: scaleX(1);
+             transform-origin: bottom left;
+         }
+
+        /* --- Layout & Container --- */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 2);
+        }
+
+        section {
+            padding: calc(var(--spacing-unit) * 5) 0;
+            position: relative; /* Needed for potential pseudo-elements */
+            overflow: hidden; /* Contain animations */
+        }
+
+        /* Alternating background with subtle pattern/gradient */
+        section:nth-child(even) {
+             background-color: var(--bg-alt-color);
+            /* Optional subtle background pattern */
+             /* background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+             background-size: 20px 20px; */
+        }
+
+        /* --- Buttons (Experimental) --- */
+        .btn {
+            display: inline-block;
+            padding: calc(var(--spacing-unit) * 0.9) calc(var(--spacing-unit) * 2.5);
+            border: 2px solid transparent; /* Start with transparent border */
+            border-radius: 50px; /* Pill shape */
+            font-size: 1rem;
+            font-family: var(--heading-font);
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all var(--transition-medium);
+            position: relative;
+            overflow: hidden; /* Contain pseudo-elements */
+            z-index: 1;
+            margin-top: var(--spacing-unit);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-glow);
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 161, 255, 0.3); /* Glow effect */
+        }
+        .btn-primary::before { /* Background fill effect on hover */
+             content: '';
+             position: absolute;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+             transform: scaleX(0);
+             transform-origin: left;
+             transition: transform var(--transition-medium);
+             z-index: -1;
+        }
+        .btn-primary:hover {
+             color: #fff;
+             box-shadow: 0 8px 20px rgba(74, 144, 226, 0.4);
+             transform: translateY(-3px);
+        }
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-glow);
+            border-color: var(--primary-glow);
+        }
+        .btn-secondary:hover {
+            background-color: var(--primary-glow);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 161, 255, 0.2);
+        }
+
+        /* --- Header & Hero (Block 1) --- */
+        #hero {
+            min-height: 100vh; /* Full viewport height */
+            display: flex;
+            align-items: center;
+            text-align: left; /* Change alignment for more dynamic feel */
+            background: linear-gradient(135deg, var(--bg-alt-color) 60%, var(--bg-color) 100%);
+            padding-top: calc(var(--spacing-unit) * 2); /* Space for logo */
+            position: relative;
+        }
+
+        /* Optional: Add subtle animated background shapes */
+        #hero::before, #hero::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(80, 227, 194, 0.1));
+            filter: blur(50px); /* Soft blur */
+            z-index: 0;
+            animation: float 15s ease-in-out infinite alternate;
+        }
+        #hero::before { /* Larger shape */
+            width: 40vw;
+            height: 40vw;
+            bottom: 10vh;
+            right: 5vw;
+        }
+        #hero::after { /* Smaller shape */
+            width: 25vw;
+            height: 25vw;
+            top: 15vh;
+            left: 10vw;
+            animation-delay: -5s; /* Offset animation */
+        }
+        @keyframes float {
+            0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+            100% { transform: translateY(-30px) translateX(20px) rotate(15deg); }
+        }
+
+
+        #hero .container {
+            position: relative; /* Keep content above background shapes */
+            z-index: 1;
+             display: grid; /* Use grid for potential asymmetry */
+             grid-template-columns: 1.5fr 1fr; /* Example: Wider text column */
+             align-items: center;
+             gap: calc(var(--spacing-unit) * 3);
+        }
+         #hero .hero-content { grid-column: 1 / 2; }
+         /* Placeholder for potential image/graphic on the right */
+         /* #hero .hero-visual { grid-column: 2 / 3; background: #eee; height: 300px; border-radius: 10px;} */
+
+        #hero h1 { margin-bottom: var(--spacing-unit); }
+        #hero h2.sub-headline {
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            font-weight: 400;
+            color: var(--light-text-color);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            max-width: 55ch;
+        }
+        #hero .intro-p {
+            font-size: 1.1rem;
+            margin-bottom: calc(var(--spacing-unit) * 2.5);
+            color: var(--light-text-color);
+            max-width: 60ch;
+        }
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+            display: grid; /* Grid layout for benefits */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: calc(var(--spacing-unit) * 1.5);
+            margin: calc(var(--spacing-unit) * 2.5) 0;
+        }
+        .benefits-list li {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 0.75);
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-color);
+            transition: color var(--transition-fast);
+        }
+         .benefits-list li:hover { color: var(--primary-glow); }
+        .benefits-list li svg {
+             width: 24px;
+             height: 24px;
+             flex-shrink: 0; /* Prevent icon shrinking */
+             color: var(--gradient-end); /* Use accent color for icons */
+             transition: transform var(--transition-fast);
+         }
+         .benefits-list li:hover svg { transform: scale(1.1); }
+
+        .trust-indicators {
+            font-size: 0.85rem;
+            color: var(--light-text-color);
+            margin-top: var(--spacing-unit);
+            opacity: 0.8;
+        }
+
+
+        /* --- Section Specific Styles --- */
+
+        /* Block 2: Problem/Solution - Asymmetric Grid */
+        #problem-solution .container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr; /* Asymmetric layout */
+            gap: calc(var(--spacing-unit) * 4);
+            align-items: center;
+        }
+        #problem-solution .problem-text { grid-column: 1 / 2; }
+        #problem-solution .solution-points { grid-column: 2 / 3; }
+        #problem-solution h3 { margin-top: 0; /* Reset margin for grid items */ }
+
+
+        /* Block 3: Quality - Interactive Cards */
+        #quality .quality-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 2.5);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+        .quality-card {
+            background-color: var(--bg-color);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        }
+        .quality-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(74, 144, 226, 0.15); /* Subtle blue glow */
+            border-color: rgba(0, 161, 255, 0.4);
+        }
+        .quality-card h3 { margin-top: 0; }
+         .quality-card ul {
+             list-style: none; /* Remove default bullets */
+             padding-left: 0;
+             margin-top: var(--spacing-unit);
+         }
+         .quality-card li {
+             margin-bottom: calc(var(--spacing-unit) * 0.75);
+             position: relative;
+             padding-left: calc(var(--spacing-unit) * 1.8);
+             font-size: 0.95rem;
+         }
+         /* Custom bullet points */
+         .quality-card li::before {
+             content: '✓'; /* Or use SVG */
+             position: absolute;
+             left: 0;
+             top: 2px;
+             color: var(--gradient-end);
+             font-weight: 700;
+             font-size: 1rem;
+         }
+
+
+        /* Block 4: Speed - More dynamic presentation */
+        #speed { text-align: center; }
+        #speed .speed-content {
+             max-width: 750px;
+             margin: 0 auto calc(var(--spacing-unit) * 2) auto;
+        }
+         #speed ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+             flex-wrap: wrap;
+            justify-content: center;
+             gap: calc(var(--spacing-unit)*1);
+            margin: calc(var(--spacing-unit) * 2) 0;
+        }
+         #speed li {
+             background: var(--bg-alt-color);
+             padding: calc(var(--spacing-unit)*0.5) calc(var(--spacing-unit)*1);
+             border-radius: 20px;
+             font-size: 0.9rem;
+             font-weight: 500;
+             border: 1px solid var(--border-color);
+             transition: all var(--transition-fast);
+         }
+         #speed li strong { color: var(--text-color); font-weight: 700; }
+         #speed li:hover {
+             background: var(--primary-glow);
+             color: white;
+             border-color: var(--primary-glow);
+             transform: scale(1.05);
+         }
+
+
+        /* Block 5: Treatments - Enhanced Cards */
+        #treatments .treatment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+        .treatment-card {
+            background-color: var(--bg-color);
+            padding: calc(var(--spacing-unit) * 1.5);
+            border-radius: 10px;
+            border: 1px solid transparent; /* Start transparent */
+            position: relative;
+            overflow: hidden;
+            transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+        }
+         /* Gradient border effect */
+         .treatment-card::before {
+             content: '';
+             position: absolute;
+             inset: 0;
+             border-radius: 10px;
+             padding: 1px; /* Border thickness */
+             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+             -webkit-mask:
+                 linear-gradient(#fff 0 0) content-box,
+                 linear-gradient(#fff 0 0);
+             mask:
+                 linear-gradient(#fff 0 0) content-box, /* Show background */
+                 linear-gradient(#fff 0 0); /* Create hole for border */
+             -webkit-mask-composite: xor;
+             mask-composite: exclude; /* Standard */
+             opacity: 0.5;
+             transition: opacity var(--transition-medium);
+         }
+        .treatment-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+        }
+         .treatment-card:hover::before { opacity: 1; }
+
+        .treatment-card h4 {
+            color: var(--text-color); /* Keep heading dark */
+            margin-bottom: calc(var(--spacing-unit) * 0.75);
+            font-size: 1.25rem;
+        }
+        .treatment-card ul { list-style: none; padding: 0; margin-bottom: var(--spacing-unit); }
+        .treatment-card ul li { margin-bottom: calc(var(--spacing-unit) * 0.4); font-size: 0.9rem; color: var(--light-text-color); }
+        .treatment-card .benefit {
+             font-weight: 600;
+             color: var(--primary-glow);
+             font-size: 0.9rem;
+             margin-top: var(--spacing-unit);
+             display: block;
+         }
+         .treatment-card .benefit::before { content: none; } /* Remove old 'Benefit:' prefix */
+
+
+        /* Block 6: Culture - Abstract Background */
+        #culture {
+             text-align: center;
+             background-color: var(--bg-color); /* Override alternating background */
+             position: relative;
+        }
+         /* Abstract shapes */
+         #culture::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(80, 227, 194, 0.15) 0%, rgba(80, 227, 194, 0) 70%);
+             z-index: 0;
+         }
+         #culture::after {
+            content: '';
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(74, 144, 226, 0.1) 0%, rgba(74, 144, 226, 0) 70%);
+             border-radius: 50%;
+             z-index: 0;
+         }
+        #culture .container { position: relative; z-index: 1; }
+        #culture .culture-content { max-width: 700px; margin: 0 auto; }
+        #culture ul {
+            list-style: none;
+            padding: 0;
+            margin: calc(var(--spacing-unit) * 2) 0;
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-unit);
+            flex-wrap: wrap;
+        }
+        #culture li {
+             background: rgba(255, 255, 255, 0.8);
+             padding: calc(var(--spacing-unit) * 0.6) calc(var(--spacing-unit) * 1.2);
+             border-radius: 6px;
+             font-weight: 500;
+             font-size: 0.9rem;
+             border: 1px solid rgba(0, 0, 0, 0.05);
+             backdrop-filter: blur(3px); /* Glassmorphism effect */
+         }
+
+
+        /* Block 7: How It Works - Timeline Style */
+        #how-it-works { background-color: var(--bg-alt-color); }
+        #how-it-works .container { max-width: 800px; } /* Narrower for timeline */
+        .process-steps {
+            list-style: none;
+            padding: 0;
+            margin-top: calc(var(--spacing-unit) * 3);
+            position: relative;
+        }
+         /* Central timeline line */
+         .process-steps::before {
+             content: '';
+             position: absolute;
+             top: 15px; /* Align with center of numbers */
+             bottom: 15px;
+             left: calc(var(--spacing-unit) * 1.5); /* Position line under numbers */
+             width: 3px;
+             background: linear-gradient(180deg, var(--gradient-start), var(--gradient-end));
+             border-radius: 2px;
+             opacity: 0.3;
+         }
+
+        .process-steps li {
+            position: relative;
+            padding-left: calc(var(--spacing-unit) * 4); /* Space for number and line */
+            margin-bottom: calc(var(--spacing-unit) * 2.5);
+        }
+        /* Step number circle */
+        .process-steps li::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: white;
+             border: 2px solid var(--primary-glow);
+            color: var(--primary-glow);
+            width: calc(var(--spacing-unit) * 3);
+            height: calc(var(--spacing-unit) * 3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-family: var(--heading-font);
+            font-size: 1rem;
+            z-index: 1; /* Above the timeline line */
+             transition: all var(--transition-medium);
+        }
+         .process-steps li:hover::before {
+             background: var(--primary-glow);
+             color: white;
+             transform: scale(1.1);
+             box-shadow: 0 0 15px rgba(0, 161, 255, 0.4);
+         }
+         .process-steps strong { color: var(--text-color); font-weight: 700; display: block; margin-bottom: calc(var(--spacing-unit) * 0.25); font-size: 1.1rem; }
+         .process-steps p { font-size: 0.95rem; margin-bottom: 0; }
+
+
+        /* Block 8: Final CTA - Stronger Visual */
+        #final-cta {
+            text-align: center;
+            background: linear-gradient(135deg, #3A1C71, #D76D77, #FFAF7B); /* Example bold gradient */
+             background: linear-gradient(120deg, var(--gradient-start) 0%, var(--secondary-accent) 100%);
+            color: #fff;
+            padding: calc(var(--spacing-unit) * 6) 0;
+        }
+        #final-cta h2 { color: #fff; }
+         #final-cta h2::after { background: white; } /* White underline on dark bg */
+        #final-cta p { color: rgba(255, 255, 255, 0.85); max-width: 70ch; margin-left: auto; margin-right: auto; }
+        #final-cta .benefits-summary {
+             font-weight: 600;
+             margin: calc(var(--spacing-unit) * 2) 0;
+             color: #fff;
+             opacity: 0.9;
+             font-size: 1.1rem;
+         }
+        #final-cta .btn-primary {
+             background-color: #fff; /* White button on gradient */
+             color: var(--primary-glow);
+             font-size: 1.1rem;
+             padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 3);
+             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+             border: none;
+         }
+         #final-cta .btn-primary::before { background: var(--bg-alt-color); } /* Light fill on hover */
+         #final-cta .btn-primary:hover {
+             color: var(--secondary-accent); /* Change text color on hover */
+             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+         }
+         #final-cta .contact-info {
+             margin-top: calc(var(--spacing-unit) * 2.5);
+             font-size: 0.9rem;
+             color: rgba(255, 255, 255, 0.7);
+         }
+         #final-cta .contact-info a { color: #fff; }
+
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2.5) 0;
+            background-color: var(--bg-alt-color);
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--light-text-color);
+        }
+         /* Footer Easter Egg Trigger - Hover over the year */
+         #current-year:hover {
+             cursor: help; /* Hint for interactivity */
+             color: var(--secondary-accent);
+             font-weight: 700;
+         }
+
+
+        /* --- Scroll Animations --- */
+        [data-scroll-reveal] {
+            opacity: 0;
+            transform: translateY(30px); /* Start slightly lower */
+            transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), /* Bounce effect */
+                        transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        [data-scroll-reveal].is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Staggered animation for lists/grids */
+         [data-scroll-reveal] > * {
+            transition-delay: calc(var(--stagger-index, 0) * 100ms); /* JS will set --stagger-index */
+         }
+
+
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            :root { --spacing-unit: 0.9rem; }
+            #hero .container { grid-template-columns: 1fr; text-align: center; }
+             #hero .hero-content { grid-column: 1 / -1; }
+             #hero .hero-visual { display: none; } /* Hide visual placeholder */
+             #hero h1 { margin: 0 auto var(--spacing-unit) auto; max-width: 20ch;}
+             #hero h2.sub-headline { margin: 0 auto calc(var(--spacing-unit) * 2) auto; }
+             #hero .intro-p { margin: 0 auto calc(var(--spacing-unit) * 2.5) auto; }
+             h2::after { left: 50%; transform: translateX(-50%); } /* Center underline */
+             #problem-solution .container { grid-template-columns: 1fr; text-align: center; }
+             #problem-solution .problem-text, #problem-solution .solution-points { grid-column: 1 / -1; }
+             p { max-width: none; } /* Remove max-width constraint */
+        }
+
+        @media (max-width: 576px) {
+            html { font-size: 15px; }
+            .benefits-list { grid-template-columns: 1fr; } /* Stack benefits */
+             #quality .quality-features { grid-template-columns: 1fr; }
+             #treatments .treatment-grid { grid-template-columns: 1fr; }
+             .process-steps::before { left: calc(var(--spacing-unit) * 1.2); } /* Adjust timeline position */
+             .process-steps li { padding-left: calc(var(--spacing-unit) * 3.5); }
+             .process-steps li::before { width: calc(var(--spacing-unit) * 2.5); height: calc(var(--spacing-unit) * 2.5); font-size: 0.9rem;}
+             .btn { width: 100%; /* Full-width buttons */ }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Simple Header with Logo -->
+    <header style="padding: var(--spacing-unit) 0; position: absolute; top: 0; left: 0; width: 100%; z-index: 10;">
+        <div class="container">
+             <!-- Logo as Easter Egg target -->
+             <a href="#" class="logo" id="main-logo" title="Click me? :)">Future<span>Med</span></a>
+        </div>
+    </header>
+
+    <!-- Block 1: Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content" data-scroll-reveal>
+                 <h1>World-Class Healthcare in Russia: <span>Affordable, Fast & High-Quality</span></h1>
+                 <h2 class="sub-headline">Stop Waiting, Start Healing. Access Top Doctors & Modern Clinics Without the Long Delays or Excessive Costs. Discover Your Path to Better Health Today.</h2>
+                <p class="intro-p">Tired of endless waiting lists and overwhelming medical bills? Imagine getting top-tier medical treatments promptly and affordably. Welcome to Russia, your gateway to exceptional healthcare blending quality and value.</p>
+                 <ul class="benefits-list">
+                     <!-- SVG Checkmark Icon -->
+                    <svg width="0" height="0" style="position:absolute;">
+                        <defs>
+                            <symbol id="icon-check" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                            </symbol>
+                        </defs>
+                    </svg>
+                    <!-- Benefits -->
+                     <li data-scroll-reveal><svg><use xlink:href="#icon-check"/></svg> Up to 70% Savings vs US/EU</li>
+                     <li data-scroll-reveal><svg><use xlink:href="#icon-check"/></svg> Minimal Waiting: Days/Weeks</li>
+                     <li data-scroll-reveal><svg><use xlink:href="#icon-check"/></svg> Advanced Clinics & Doctors</li>
+                     <li data-scroll-reveal><svg><use xlink:href="#icon-check"/></svg> Bonus: Rich Cultural Journey</li>
+                </ul>
+                <div data-scroll-reveal>
+                    <button class="btn btn-primary cta-button" data-action="quote">Get Your Free Quote</button>
+                    <div class="trust-indicators">No obligation &amp; Confidential</div>
+                </div>
+            </div>
+             <!-- Optional: Add a visual element here for larger screens -->
+             <!-- <div class="hero-visual" data-scroll-reveal></div> -->
+        </div>
+    </section>
+
+    <!-- Block 2: The Problem & The Smart Solution -->
+    <section id="problem-solution">
+        <div class="container">
+             <div class="problem-text" data-scroll-reveal>
+                 <h2>Escape the Healthcare Maze</h2>
+                 <p>Frustrated by the dilemma of high costs for quality or long waits for affordability? Your health deserves better. Discover a balanced, effective path to the treatment you need, precisely when you need it.</p>
+            </div>
+             <div class="solution-points" data-scroll-reveal>
+                <h3>Why Russia is Your Smart Choice</h3>
+                <p><strong>Incredible Value:</strong> Save 50-70% on major procedures (diagnostics, surgery, fertility, dental) compared to the West. It's smart economics, not lower quality.</p>
+                 <p><strong>Proven Expertise:</strong> Access highly educated, internationally recognized doctors using cutting-edge tech in clinics meeting global standards.</p>
+                 <p style="margin-top: var(--spacing-unit); font-weight: 600;">Make a savvy investment in your health – outstanding care without the financial strain.</p>
+             </div>
+        </div>
+    </section>
+
+    <!-- Block 3: Building Trust - Quality & Expertise -->
+    <section id="quality">
+        <div class="container">
+            <h2 data-scroll-reveal>Uncompromising Quality: Trust Russian Excellence</h2>
+            <p data-scroll-reveal>Forget outdated myths. We connect you with modern, world-class medical facilities and professionals committed to exceeding expectations.</p>
+            <div class="quality-features">
+                <div class="quality-card" data-scroll-reveal>
+                    <h3>State-of-the-Art Facilities</h3>
+                    <ul>
+                        <li>Advanced MRI, CT, PET Scanners</li>
+                        <li>Robotic Surgery Systems (e.g., Da Vinci)</li>
+                        <li>Top-Tier Dental Labs & Materials</li>
+                        <li>Rigorous Sterility & Hygiene Protocols</li>
+                    </ul>
+                </div>
+                <div class="quality-card" data-scroll-reveal>
+                    <h3>Skilled Medical Professionals</h3>
+                    <ul>
+                        <li>Internationally Trained & Experienced Doctors</li>
+                        <li>Deep Specialization (Cardiology, Ortho, IVF etc.)</li>
+                        <li>English Fluency & Medical Interpreters</li>
+                        <li>Commitment to Evidence-Based Care</li>
+                    </ul>
+                </div>
+            </div>
+            <p data-scroll-reveal style="margin-top: calc(var(--spacing-unit) * 2); text-align: center; font-weight: 600;">Meticulously vetted partners ensure safe, effective care.</p>
+        </div>
+    </section>
+
+    <!-- Block 4: Highlighting Speed -->
+    <section id="speed">
+        <div class="container">
+            <div class="speed-content" data-scroll-reveal>
+                 <h2>Say Goodbye to Waiting Lists</h2>
+                 <p>Endless waits compromise health and add stress. Russia offers a refreshingly efficient alternative.</p>
+                 <ul>
+                     <li><strong>Prompt Appointments:</strong> Often within days.</li>
+                     <li><strong>Swift Procedures:</strong> Typically within weeks.</li>
+                     <li><strong>Reduced Anxiety:</strong> Focus on recovery.</li>
+                     <li><strong>Better Outcomes:</strong> Timely intervention matters.</li>
+                 </ul>
+                <p>Imagine quickly getting that knee replacement, cataract surgery, or IVF cycle. We coordinate everything for a smooth, rapid journey.</p>
+                <button class="btn btn-secondary cta-button" data-action="availability">Check Availability</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Block 5: Concrete Examples -->
+    <section id="treatments">
+        <div class="container">
+            <h2 data-scroll-reveal>Explore Popular High-Quality Treatments</h2>
+            <p data-scroll-reveal>Patients worldwide choose Russia for specialized care. Our partner clinics excel in:</p>
+            <div class="treatment-grid">
+                <div class="treatment-card" data-scroll-reveal>
+                    <h4>Dentistry</h4>
+                    <ul><li>Implants, All-on-4/6</li><li>Veneers, Crowns</li><li>Full Restorations</li></ul>
+                    <span class="benefit">Top materials, significant savings.</span>
+                </div>
+                <div class="treatment-card" data-scroll-reveal>
+                    <h4>Ophthalmology</h4>
+                    <ul><li>LASIK, Femto-LASIK</li><li>Premium Cataract Surgery</li><li>Glaucoma Treatment</li></ul>
+                    <span class="benefit">Advanced tech, experienced surgeons.</span>
+                </div>
+                 <div class="treatment-card" data-scroll-reveal>
+                     <h4>Orthopedics</h4>
+                     <ul><li>Hip & Knee Replacement</li><li>Spinal Surgery</li><li>Sports Medicine</li></ul>
+                    <span class="benefit">Regain mobility, modern rehab.</span>
+                 </div>
+                <div class="treatment-card" data-scroll-reveal>
+                    <h4>Fertility (IVF)</h4>
+                     <ul><li>IVF, ICSI, Egg Donation</li><li>Surrogacy Programs</li></ul>
+                    <span class="benefit">High success rates, affordable care.</span>
+                </div>
+                <div class="treatment-card" data-scroll-reveal>
+                    <h4>Cosmetic Surgery</h4>
+                    <ul><li>Facelift, Rhinoplasty</li><li>Breast Augmentation</li><li>Liposuction</li></ul>
+                    <span class="benefit">Board-certified surgeons, modern clinics.</span>
+                </div>
+                 <div class="treatment-card" data-scroll-reveal>
+                     <h4>Advanced Diagnostics</h4>
+                     <ul><li>Full Body Scans (MRI/CT)</li><li>Genetic Testing</li><li>Specialized Check-ups</li></ul>
+                     <span class="benefit">Precise, fast, and cost-effective.</span>
+                 </div>
+            </div>
+             <p data-scroll-reveal style="margin-top: calc(var(--spacing-unit) * 2);">Connecting you with the right specialists in Russia.</p>
+        </div>
+    </section>
+
+    <!-- Block 6: Added Value - Cultural Experience -->
+    <section id="culture">
+        <div class="container">
+             <div class="culture-content" data-scroll-reveal>
+                 <h2>More Than Medicine: Discover Russia</h2>
+                 <p>Combine wellness with an unforgettable travel adventure. Explore Russia's rich history, art, and stunning landscapes during your medical journey.</p>
+                 <h3>Highlights:</h3>
+                 <ul>
+                     <li>Iconic Landmarks</li>
+                     <li>World-Class Arts</li>
+                     <li>Culinary Delights</li>
+                     <li>Genuine Hospitality</li>
+                 </ul>
+                 <p>We assist with stays, guides, and activities suited to your schedule. Make memories beyond treatment.</p>
+             </div>
+        </div>
+    </section>
+
+    <!-- Block 7: How It Works -->
+    <section id="how-it-works">
+        <div class="container">
+            <h2 data-scroll-reveal>Your Seamless Journey: How We Help</h2>
+            <p data-scroll-reveal>Navigating international healthcare is easy with our dedicated support from start to finish.</p>
+            <ol class="process-steps">
+                 <li data-scroll-reveal><strong>Free Initial Consultation:</strong> Discuss needs & history (no obligation).</li>
+                 <li data-scroll-reveal><strong>Personalized Plan & Quote:</strong> Vetted clinics, transparent costs.</li>
+                 <li data-scroll-reveal><strong>Hassle-Free Arrangements:</strong> Visa help, flights, accommodation, transfers.</li>
+                 <li data-scroll-reveal><strong>Clear Communication:</strong> Professional medical interpreters.</li>
+                 <li data-scroll-reveal><strong>On-Site Support:</strong> Personal coordinator during your stay.</li>
+                 <li data-scroll-reveal><strong>Post-Treatment Care:</strong> Facilitate follow-up communication.</li>
+            </ol>
+             <p data-scroll-reveal style="text-align: center; font-weight: 600; margin-top: calc(var(--spacing-unit) * 2);">We handle logistics, you focus on health.</p>
+        </div>
+    </section>
+
+    <!-- Block 8: Final Call to Action -->
+    <section id="final-cta">
+        <div class="container" data-scroll-reveal>
+            <h2>Ready for a Healthier, Happier You?</h2>
+            <p class="benefits-summary">Access high-quality, affordable care without the wait. Skilled doctors, modern clinics, incredible savings & cultural discovery await in Russia.</p>
+            <p>Don't compromise your well-being. Contact us NOW for your FREE, no-obligation consultation and personalized quote.</p>
+            <button class="btn btn-primary cta-button" data-action="consultation">Request Free Consultation</button>
+            <div class="contact-info">
+                Or call us at <a href="tel:+[YourPhoneNumber]">[Your Phone Number]</a> / Email: <a href="mailto:[YourEmailAddress]">[Your Email Address]</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year" title="Psst! Check the console (F12) ;) "></span> FutureMed Russia. All rights reserved. | Your Partner in Medical Travel</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Enhanced JavaScript ---
+
+        // 1. Set current year & Easter Egg Hint Setup
+        const currentYearSpan = document.getElementById('current-year');
+        currentYearSpan.textContent = new Date().getFullYear();
+         // (Title attribute already added in HTML for hover hint)
+
+        // 2. CTA Button Handler (Still using alert for demo)
+        const ctaButtons = document.querySelectorAll('.cta-button');
+        ctaButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const action = this.getAttribute('data-action');
+                 alert(`Action: ${action}. Let's proceed! (Placeholder)`);
+                 console.log(`CTA Triggered: ${action}`);
+            });
+        });
+
+        // 3. Intersection Observer for Scroll Animations
+        const revealElements = document.querySelectorAll('[data-scroll-reveal]');
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Add stagger effect for children if needed
+                    const children = entry.target.children;
+                    if (children.length > 1 && entry.target.classList.contains('benefits-list') || entry.target.classList.contains('treatment-grid') || entry.target.classList.contains('quality-features') || entry.target.classList.contains('process-steps')) {
+                        Array.from(children).forEach((child, childIndex) => {
+                             child.style.setProperty('--stagger-index', childIndex);
+                        });
+                    }
+                    // Add class to trigger animation
+                    entry.target.classList.add('is-visible');
+                    // Optional: Unobserve after revealing to save resources
+                    // observer.unobserve(entry.target);
+                }
+                 // Optional: Reset animation if element scrolls out of view
+                 // else {
+                 //     entry.target.classList.remove('is-visible');
+                 // }
+            });
+        }, {
+            threshold: 0.1, // Trigger when 10% of the element is visible
+            // rootMargin: "-50px 0px -50px 0px" // Optional: adjust trigger area
+        });
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+
+        // 4. Easter Egg 1: Logo Spin on Click
+        const logo = document.getElementById('main-logo');
+         let spinTimeout;
+        logo.addEventListener('click', (e) => {
+             e.preventDefault(); // Prevent default link behavior
+             if (logo.classList.contains('easter-egg-spin')) return; // Prevent multiple clicks during animation
+
+             logo.classList.add('easter-egg-spin');
+             console.log('Logo clicked! Spin initiated.');
+
+             // Clear previous timeout if exists
+             clearTimeout(spinTimeout);
+
+             // Remove class after animation finishes (500ms duration)
+             spinTimeout = setTimeout(() => {
+                 logo.classList.remove('easter-egg-spin');
+             }, 500);
+        });
+
+         // 5. Easter Egg 2: Console Message
+         console.log(`%c
+███████╗██╗   ██╗████████╗ ██████╗███████╗ ██████╗ ███████╗██████╗
+██╔════╝██║   ██║╚══██╔══╝██╔════╝██╔════╝██╔════╝ ██╔════╝██╔══██╗
+███████╗██║   ██║   ██║   ██║     ███████╗██║  ███╗███████╗██████╔╝
+╚════██║██║   ██║   ██║   ██║     ╚════██║██║   ██║╚════██║██╔══██╗
+███████║╚██████╔╝   ██║   ╚██████╗███████║╚██████╔╝███████║██║  ██║
+╚══════╝ ╚═════╝    ╚═╝    ╚═════╝╚══════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
+`, "color: #4A90E2; font-weight: bold;");
+         console.log("%c👋 Hello there, curious developer! %cLooks like you found an Easter Egg. 😉\nInterested in how this page works or have questions about medical travel to Russia? We appreciate attention to detail! Contact us!",
+             "color: #00A1FF; font-size: 14px; font-weight: bold;",
+             "color: #555; font-size: 12px;");
+
+
+         // Optional 6. Easter Egg 3: Hint on year hover (already hinted with title attr)
+         // Could add more complex JS logic here if needed
+
+
+    </script>
+
+</body>
+</html>
