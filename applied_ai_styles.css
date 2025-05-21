@@ -1,0 +1,1101 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Manrope:wght@700;800&display=swap');
+
+/* 1. Global Styles */
+:root {
+    /* Color Palette */
+    --primary-color: #2B50AA; /* Muted Sapphire */
+    --accent-color: #00A1FF; /* Bright Cyan */
+    --background-color-dark: #0D1117; /* Near-black */
+    --background-color-light: #161B22; /* Lighter Grey for cards/contrast */
+    --text-color-primary: #F0F0F0; /* Off-white */
+    --text-color-secondary: #A0A0A0; /* Dimmer grey */
+    --border-color: #21262d; /* Slightly lighter than background-color-light */
+
+    /* Typography */
+    --font-family-headings: 'Manrope', sans-serif;
+    --font-family-body: 'Inter', sans-serif;
+
+    /* Responsive Font Sizes (Example) */
+    --font-size-h1: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+    --font-size-h2: clamp(2rem, 4vw + 0.8rem, 3.5rem);
+    --font-size-h3: clamp(1.75rem, 3vw + 0.7rem, 2.75rem);
+    --font-size-body: clamp(1rem, 0.5vw + 0.9rem, 1.125rem);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-body);
+    color: var(--text-color-primary);
+    background-color: var(--background-color-dark);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover,
+a:focus {
+    color: var(--primary-color);
+}
+
+img, picture, svg, video {
+    display: block;
+    max-width: 100%;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 15px; /* Basic horizontal padding */
+}
+
+/* 2. Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-headings);
+    font-weight: 700; /* Bold for headings */
+    line-height: 1.2;
+    margin-bottom: 0.75em; /* Space below headings */
+    color: var(--text-color-primary);
+}
+
+h1 {
+    font-size: var(--font-size-h1);
+    font-weight: 800; /* Extra bold for H1 */
+    margin-bottom: 0.5em;
+    text-shadow: 0px 2px 4px rgba(0,0,0,0.3); /* Subtle text shadow for depth */
+}
+
+h2 {
+    font-size: var(--font-size-h2);
+    margin-bottom: 0.6em;
+}
+
+h3 {
+    font-size: var(--font-size-h3);
+}
+
+p {
+    margin-bottom: 1.25em; /* Space below paragraphs */
+    color: var(--text-color-secondary); /* Slightly dimmer for body text for contrast */
+}
+
+/* Ensure main content text uses primary text color if not overridden */
+main p, main li {
+    color: var(--text-color-primary);
+}
+
+.sub-headline {
+    font-size: clamp(1.1rem, 1vw + 0.9rem, 1.3rem);
+    color: var(--text-color-secondary);
+    max-width: 700px; /* Constrain hero paragraph width */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5em;
+}
+
+
+/* 3. Layout */
+section {
+    padding: 80px 0; /* Generous padding for sections */
+    border-bottom: 1px solid var(--border-color);
+}
+
+section:last-of-type {
+    border-bottom: none;
+}
+
+/* 4. Navigation Bar */
+header {
+    position: sticky; /* Fixed/Sticky at the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(13, 17, 23, 0.85); /* Dark background, slightly transparent */
+    backdrop-filter: blur(10px); /* Blur effect for supporting browsers */
+    -webkit-backdrop-filter: blur(10px); /* Safari */
+    z-index: 1000; /* Ensure it's above other content */
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h2 { /* Placeholder for Logo */
+    font-size: 1.8rem;
+    margin: 0;
+    color: var(--text-color-primary);
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px; /* Space between nav items */
+}
+
+header nav ul li a {
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--text-color-primary);
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+header nav ul li a:hover,
+header nav ul li a.active {
+    background-color: var(--primary-color);
+    color: white; /* Ensure text is readable on primary color */
+}
+
+/* 5. Placeholders & Initial Section Styling */
+
+#hero {
+    min-height: 90vh; /* Increased height */
+    display: flex; /* Using flex for centering content */
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center;
+    background: linear-gradient(145deg, var(--primary-color) 0%, var(--background-color-dark) 60%); /* Adjusted gradient */
+    padding-top: 100px; /* Adjusted padding, header is sticky */
+    padding-bottom: 100px;
+    position: relative; /* For canvas positioning */
+    overflow: hidden; /* Ensure canvas doesn't spill out */
+}
+
+#hero .container {
+    position: relative; /* To keep content above canvas */
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#hero h1 { /* Already styled by global h1, but specific adjustments can go here */
+    color: white; /* Brighter text for hero headline */
+}
+
+/* Sub-headline already styled with .sub-headline class */
+
+/* CTA Button Styling */
+.btn {
+    padding: 12px 30px;
+    font-family: var(--font-family-headings);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    display: inline-block;
+    margin-top: 1.5em; /* Space above the button */
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: var(--background-color-dark); /* Dark text on bright button */
+    box-shadow: 0 4px 15px rgba(0, 161, 255, 0.3);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #0088cc; /* Darker shade of accent */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 161, 255, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(0, 161, 255, 0.3);
+}
+
+
+/* AI Visualization Canvas */
+#aiVisualizationCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Behind the content */
+    opacity: 0.3; /* Subtle effect */
+}
+
+
+/* Basic styling for other sections for delineation */
+/* #value-prop, #features, #curriculum, #community, #instructors, #testimonials, #enroll, #faq {
+    Padding already applied via general 'section' rule
+} */
+
+/* 6. Value Proposition Section */
+#value-prop {
+    background-color: var(--background-color-dark); /* Keep it consistent or slightly vary */
+    text-align: center; /* Center align the text for a more persuasive feel */
+}
+
+#value-prop h2 {
+    margin-bottom: 1em;
+    color: var(--text-color-primary);
+}
+
+#value-prop p {
+    font-size: clamp(1.05rem, 0.75vw + 0.9rem, 1.2rem); /* Slightly larger for emphasis */
+    line-height: 1.7;
+    color: var(--text-color-secondary);
+    max-width: 800px; /* Readable line length */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5em;
+}
+
+#value-prop p:last-of-type {
+    margin-bottom: 0;
+}
+
+/* 7. Key Features Section */
+#features {
+    background-color: var(--background-color-dark); /* Or a slightly different shade if desired */
+}
+
+#features h2 {
+    text-align: center;
+    margin-bottom: 2em; /* More space before the cards */
+    color: var(--text-color-primary);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 30px; /* Space between cards */
+}
+
+.feature-card {
+    background-color: var(--background-color-light);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the start of the card */
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent-color);
+}
+
+.feature-icon {
+    margin-bottom: 1.5rem; /* Space below icon */
+    height: 50px; /* Ensure consistent height for icon area */
+    display: flex;
+    align-items: center;
+}
+
+.feature-icon .icon-placeholder {
+    display: inline-flex; /* Use flex for centering text in placeholder */
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: var(--accent-color);
+    color: var(--background-color-dark); /* Dark text on accent */
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem; /* clamp(1.3rem, 2vw + 0.5rem, 1.6rem); */
+    color: var(--text-color-primary);
+    margin-bottom: 0.75rem;
+}
+
+.feature-card p {
+    font-size: 0.95rem; /* clamp(0.9rem, 0.5vw + 0.7rem, 1rem); */
+    color: var(--text-color-secondary);
+    line-height: 1.6;
+    margin-bottom: 0; /* Remove default paragraph margin if card is flex container */
+    flex-grow: 1; /* Allows paragraph to take available space if needed */
+}
+
+/* 8. Curriculum Section */
+#curriculum {
+    background-color: var(--background-color-dark);
+}
+
+#curriculum h2 {
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.curriculum-accordion {
+    max-width: 900px; /* Constrain width for better readability */
+    margin: 0 auto;
+}
+
+.curriculum-module {
+    background-color: var(--background-color-light);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-bottom: 15px;
+    overflow: hidden; /* Important for max-height transition */
+}
+
+.curriculum-module:last-child {
+    margin-bottom: 0;
+}
+
+.module-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.module-header:hover {
+    background-color: rgba(255, 255, 255, 0.03); /* Subtle hover for header */
+}
+
+.module-header h3 {
+    font-size: 1.3rem; /* clamp(1.2rem, 1.5vw + 0.8rem, 1.4rem); */
+    margin-bottom: 0;
+    color: var(--text-color-primary);
+}
+
+.module-toggle-icon {
+    font-size: 1.8rem;
+    font-weight: 300; /* Lighter weight for + / - */
+    color: var(--accent-color);
+    transition: transform 0.3s ease;
+}
+
+.module-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, padding 0.3s ease-in-out; /* Smooth transition for opening/closing */
+    padding: 0 25px; /* Horizontal padding only when closed, vertical added when open */
+}
+
+.curriculum-module.module-open .module-content {
+    /* max-height should be set dynamically if content varies greatly,
+       or to a sufficiently large value if content is somewhat consistent.
+       For now, a large static value. JS can help here if needed. */
+    max-height: 700px; /* Adjust as needed for your content length */
+    padding: 20px 25px 25px; /* Add vertical padding when open */
+}
+
+.curriculum-module.module-open .module-toggle-icon {
+    transform: rotate(45deg); /* Changes + to a stylised X or cross */
+}
+
+.module-content p {
+    font-size: 0.95rem;
+    color: var(--text-color-secondary);
+    margin-bottom: 1.2em;
+    line-height: 1.7;
+}
+
+.module-content h4 {
+    font-size: 1.05rem;
+    color: var(--text-color-primary);
+    margin-bottom: 0.75em;
+    font-weight: 700;
+}
+
+.module-content ul {
+    list-style: none; /* Remove default bullets */
+    padding-left: 0; /* Remove default padding */
+    margin-bottom: 1em;
+}
+
+.module-content ul li {
+    font-size: 0.95rem;
+    color: var(--text-color-secondary);
+    padding: 8px 0;
+    padding-left: 25px; /* Space for custom bullet */
+    position: relative;
+    border-bottom: 1px dashed rgba(var(--border-color), 0.5);
+}
+.module-content ul li:last-child {
+    border-bottom: none;
+}
+
+.module-content ul li::before {
+    content: '✓'; /* Custom bullet */
+    position: absolute;
+    left: 0;
+    top: 8px; /* Adjust vertical alignment */
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+
+/* --- Animation & Interaction Enhancements --- */
+
+/* Base class for elements that will reveal on scroll */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px); /* Default: fade in up */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Specific animation types */
+.fade-in-up { /* Can be the same as reveal-on-scroll or more specific if needed */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.scale-in {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+/* Initial states for specific components that will be animated by Intersection Observer */
+/* These ensure they are hidden before JS adds .is-visible */
+.feature-card,
+.instructor-profile,
+.testimonial-item,
+#value-prop h2, #value-prop p, /* Specific elements can also get reveal-on-scroll */
+#community .community-text, #community .community-visual-placeholder,
+#curriculum h2,
+#instructors h2,
+#testimonials h2,
+#enroll h2, #enroll .enroll-subtitle, #enroll .btn, #enroll .enroll-secondary-info,
+#faq h2 {
+    opacity: 0; /* Start hidden */
+    /* Default to fade-in-up, can be overridden by adding slide-in etc. in HTML */
+    transform: translateY(30px); 
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease-out, border-color 0.3s ease-out;
+}
+
+
+/* Class added by Intersection Observer to trigger animation */
+.is-visible {
+    opacity: 1;
+    transform: translateY(0) translateX(0) scale(1); /* Reset transforms */
+}
+
+/* Fallback for prefers-reduced-motion: just make it visible, no animation */
+.is-visible-no-animation {
+    opacity: 1;
+    transform: none; /* Reset any transform */
+}
+
+/* Staggered animation delays will be applied inline by JS */
+
+
+/* Refined Hover Effects & Microinteractions */
+header nav ul li a {
+    position: relative; /* For pseudo-element underline */
+    padding: 10px 15px; /* Slightly more padding */
+    border-radius: 4px;
+    transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+}
+
+header nav ul li a::after { /* Underline effect */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px; /* Position below the link */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+header nav ul li a:hover::after,
+header nav ul li a.active::after {
+    width: 70%; /* Underline width on hover/active */
+}
+
+header nav ul li a.active {
+    color: var(--accent-color); /* More prominent active link */
+    /* background-color: var(--primary-color); from previous styles, this is fine */
+}
+
+/* Ensure feature card hover is smooth (already good, but listed for completeness) */
+.feature-card:hover {
+    transform: translateY(-10px); /* Slightly more lift */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+    border-color: var(--accent-color);
+}
+
+/* Instructor profile hover (already good) */
+.instructor-profile:hover {
+    transform: translateY(-10px); /* Slightly more lift */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Module header hover in accordion (already good) */
+.module-header:hover {
+    background-color: rgba(var(--accent-color-rgb, 0, 161, 255), 0.1); /* Use accent color with low opacity */
+}
+
+/* Add :root definition for --accent-color-rgb if not present */
+:root {
+    /* ... other variables ... */
+    --accent-color-rgb: 0, 161, 255; /* Assuming --accent-color is #00A1FF */
+    --primary-color-rgb: 43, 80, 170; /* Assuming --primary-color is #2B50AA */
+}
+
+/* Footer links hover */
+footer a { /* Assuming links might be added to footer */
+    transition: color 0.3s ease;
+}
+footer a:hover {
+    color: var(--text-color-primary);
+}
+
+
+/* --- End of Animation & Interaction Enhancements --- */
+
+
+/* 9. Community Section */
+#community {
+    background-color: var(--background-color-light); /* Slightly different background */
+    padding: 100px 0; /* More padding for a spacious feel */
+}
+
+#community h2 { /* Already animated by general rule */
+    text-align: center;
+    margin-bottom: 1.5em;
+}
+
+.community-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column by default */
+    gap: 40px;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .community-content-wrapper {
+        grid-template-columns: 2fr 1fr; /* Two columns for text and visual */
+        gap: 60px;
+    }
+    /* Specific animation for two-column layout if needed */
+    .community-text.is-visible {
+        /* Example: could slide in from left if it has a specific class */
+    }
+    .community-visual-placeholder.is-visible {
+         /* Example: could slide in from right if it has a specific class */
+    }
+}
+
+.community-text h3 {
+    font-size: 1.5rem;
+    color: var(--text-color-primary);
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+}
+
+.community-text p {
+    color: var(--text-color-secondary);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1.2em;
+}
+
+.community-text ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.community-text ul li {
+    font-size: 1rem;
+    color: var(--text-color-secondary);
+    padding: 10px 0 10px 30px;
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
+    /* Individual li items could also be animated if desired, by adding a class and observing */
+}
+.community-text ul li:last-child {
+    border-bottom: none;
+}
+
+.community-text ul li::before {
+    content: '🤝'; /* Emoji or other icon */
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: var(--accent-color);
+}
+
+.community-visual-placeholder {
+    background-color: var(--background-color-dark);
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.community-visual-placeholder p {
+    color: var(--text-color-secondary);
+    font-size: 1.2rem;
+    margin-bottom: 0;
+}
+
+
+/* 10. Instructors Section */
+#instructors {
+    background-color: var(--background-color-dark);
+}
+
+#instructors h2 {
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.instructors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.instructor-profile {
+    background-color: var(--background-color-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.instructor-profile:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+.instructor-image-placeholder {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background-color: var(--primary-color); /* Placeholder color */
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid var(--accent-color);
+}
+
+.instructor-image-placeholder span {
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.instructor-profile h3 {
+    font-size: 1.6rem;
+    color: var(--text-color-primary);
+    margin-bottom: 0.25em;
+}
+
+.instructor-profile .instructor-title {
+    font-size: 1rem;
+    color: var(--accent-color);
+    margin-bottom: 0.75em;
+    font-weight: 500;
+}
+
+.instructor-profile .instructor-bio {
+    font-size: 0.9rem;
+    color: var(--text-color-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.25em;
+}
+
+.instructor-links a {
+    color: var(--text-color-secondary);
+    text-decoration: underline;
+    margin: 0 8px;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.instructor-links a:hover {
+    color: var(--accent-color);
+}
+
+/* 11. Testimonials Section */
+#testimonials {
+    background-color: var(--background-color-dark);
+    padding: 80px 0;
+}
+
+#testimonials h2 {
+    text-align: center;
+    margin-bottom: 2em;
+    color: var(--text-color-primary);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.testimonial-item {
+    background-color: var(--background-color-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.testimonial-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.testimonial-avatar-placeholder {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 20px;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.testimonial-author {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-color-primary);
+    margin-bottom: 0.1em;
+}
+
+.testimonial-role {
+    font-size: 0.9rem;
+    color: var(--accent-color);
+    margin-bottom: 0;
+}
+
+.testimonial-item blockquote {
+    margin: 0;
+    padding: 0;
+    flex-grow: 1; /* Ensure blockquote takes space to align footers if needed */
+}
+
+.testimonial-item blockquote p {
+    font-size: 1rem; /* clamp(0.95rem, 1vw + 0.7rem, 1.05rem); */
+    color: var(--text-color-secondary);
+    line-height: 1.7;
+    font-style: italic;
+    position: relative;
+    padding-left: 25px; /* Space for opening quote */
+    margin-bottom: 0;
+}
+
+.testimonial-item blockquote p::before {
+    content: '“';
+    font-family: Georgia, serif; /* More traditional quote font */
+    font-size: 3rem;
+    color: var(--accent-color);
+    position: absolute;
+    left: -5px;
+    top: -10px;
+    opacity: 0.8;
+}
+/* Optional: if you want a closing quote, it's trickier with multi-line paragraphs
+   and often omitted or done with JS. For simplicity, we'll stick to an opening quote. */
+
+
+/* 12. Call to Action (Enrollment) Section */
+#enroll {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    padding: 100px 0;
+    text-align: center;
+}
+
+#enroll h2 {
+    font-size: var(--font-size-h1); /* Use H1 size for emphasis */
+    color: white;
+    margin-bottom: 0.5em;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+#enroll .enroll-subtitle {
+    font-size: 1.25rem; /* clamp(1.1rem, 1.5vw + 0.8rem, 1.3rem); */
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 750px;
+    margin: 0 auto 1.5em;
+    line-height: 1.7;
+}
+
+.btn-large {
+    padding: 18px 40px;
+    font-size: 1.25rem; /* Larger font for the button text */
+    letter-spacing: 0.5px;
+}
+
+/* Re-using .btn-primary styles, .btn-large just modifies padding and font-size */
+/* If .btn-primary needs adjustments for this context, they can be made here */
+#enroll .btn-primary {
+    background-color: white; /* White button on gradient background */
+    color: var(--primary-color); /* Text color from primary palette */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+#enroll .btn-primary:hover,
+#enroll .btn-primary:focus {
+    background-color: #f0f0f0; /* Slightly off-white on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+#enroll .btn-primary:active {
+     transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.enroll-secondary-info {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 1.5em;
+}
+
+/* 13. FAQ Section */
+#faq {
+    background-color: var(--background-color-light); /* Or var(--background-color-dark) */
+    padding: 80px 0;
+}
+
+#faq h2 { /* Already animated by general rule */
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.faq-accordion {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background-color: var(--background-color-dark); /* Darker items on lighter section bg, or vice-versa */
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+.faq-item:last-child {
+    margin-bottom: 0;
+}
+
+.faq-question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.faq-question-header:hover {
+    background-color: rgba(var(--accent-color-rgb), 0.05); /* Subtle accent hover */
+}
+
+.faq-question-header h4 {
+    font-size: 1.15rem; /* clamp(1.1rem, 1.2vw + 0.7rem, 1.25rem); */
+    margin-bottom: 0;
+    color: var(--text-color-primary);
+    font-weight: 600; /* Slightly less bold than module headers */
+}
+
+.faq-toggle-icon {
+    font-size: 1.7rem;
+    font-weight: 300;
+    color: var(--accent-color);
+    transition: transform 0.3s ease;
+}
+
+.faq-answer-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, padding 0.3s ease-in-out;
+    padding: 0 25px;
+}
+
+.faq-item.faq-open .faq-answer-content {
+    max-height: 300px; /* Adjust as needed, JS will set this dynamically */
+    padding: 5px 25px 25px; /* Add padding when open, smaller top padding */
+}
+
+.faq-item.faq-open .faq-toggle-icon {
+    transform: rotate(45deg);
+}
+
+.faq-answer-content p {
+    font-size: 0.95rem;
+    color: var(--text-color-secondary);
+    line-height: 1.7;
+    margin-bottom: 0; /* Last element in content */
+}
+
+
+/* Footer Section */
+footer {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-secondary);
+    padding: 60px 0 30px;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-column h5 {
+    font-family: var(--font-family-headings);
+    font-size: 1.1rem;
+    color: var(--text-color-primary);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.footer-logo {
+    font-family: var(--font-family-headings);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-color-primary);
+    margin-bottom: 0.5em;
+}
+
+.footer-tagline {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1.5em;
+}
+
+.social-media-links a {
+    display: inline-flex; /* For alignment */
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--background-color-light);
+    color: var(--text-color-secondary);
+    border-radius: 50%;
+    margin-right: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.social-media-links a:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.social-media-links a span { /* For placeholder text */
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a,
+.footer-contact p a {
+    color: var(--text-color-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-links ul li a:hover,
+.footer-contact p a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.footer-contact p {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+.footer-copyright {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.85rem;
+    color: var(--text-color-secondary);
+}
+
+.footer-copyright p {
+    margin-bottom: 0;
+}
+
+
+/* Utility Classes (Optional but Recommended) */
+.text-center {
+    text-align: center;
+}
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mb-5 { margin-bottom: 3rem; }
+
+/* Add more styles as components are developed */
